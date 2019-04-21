@@ -1,0 +1,43 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <math.h>
+
+
+int main(void)
+{
+    //The amount of cash owed
+    float changeOwed;
+    
+    //Coins' nominal
+    int quarters = 25;
+    int dimes = 10;
+    int nickels = 5;
+    int pennies = 1;
+    
+    //Try until the input is positive
+    do 
+    {
+        //User's input
+        changeOwed = get_float("How much change owed?:");
+   
+    } 
+    while (changeOwed <= 0);
+    
+    //Conversion to cents
+    int coins = round(changeOwed * 100);
+    
+    //find coins - quaters first
+    int numOfQuaters = coins / quarters;
+    //dimes
+    int numOfDimes = (coins % quarters) / dimes;
+    //nickels
+    int numOfnickels = ((coins % quarters) % dimes) / nickels;
+    //pennies
+    int numOfpennies = (((coins % quarters) % dimes) % nickels) / pennies;
+    //sum of coins
+    int sumOfNumCoins = numOfQuaters + numOfDimes + numOfnickels + numOfpennies;
+    //# of quaters
+    printf("%d", sumOfNumCoins);
+    
+    printf("\n");
+    
