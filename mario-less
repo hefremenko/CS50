@@ -1,0 +1,33 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    //Input of height
+    int number = 0;
+    //ask for number until it will be >0 and <23
+    do 
+    {
+        number = get_int("Height?");  
+        //if zero return nothing    
+    } 
+    while (number < 1 || number > 8);
+   
+    //rows
+    for (int a = 0; a < number; a++) 
+    {
+        //spaces in a row
+        for (int b = 0; b < number - a - 1; b++) 
+        {
+            printf("%s", " ");
+        }
+        //dashes in a row
+        for (int c = 0 ; c < a + 1; c++) 
+        {
+            printf("#");
+        }
+        //next line            
+        printf("\n");
+    }
+    return 0;
+}
