@@ -1,0 +1,63 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void terminate(void);
+
+int main(int argc, string argv[]) 
+{  
+    //no more than 2 arguments
+    if (argc != 2) 
+    {
+        terminate();
+    }
+    // key validation
+    for (int i = 0, n = strlen(argv[1]); i < n; i++) 
+    {
+        //not integers
+        if (argv[1][i] < 65 && argv[1][i] > 90)
+        {
+            terminate();
+        } 
+        else 
+        {
+            //Key - converted 2nd argument
+            int key = atoi(argv[argc - 1]);
+                
+            //get the initial phrase
+            string plaintext = get_string("plaintext:");
+                
+            printf("ciphertext: ");
+            //iterate through characters
+            for (int k = 0, p = strlen(plaintext); k < p; k++) 
+            {
+                //is upper capitalization
+                if (isupper(plaintext[k])) 
+                {
+                    printf("%c", ((plaintext[k] - 65 + key) % 26) + 65);
+                } 
+                //lower capitalization
+                else if (islower(plaintext[k])) 
+                {
+                    printf("%c", ((plaintext[k] - 97 + key) % 26) + 97);
+                } 
+                //other characters
+                else 
+                {
+                    printf("%c", plaintext[k]);
+                }
+
+            }
+            printf("\n");
+            return 0;
+    
+        }
+    }
+}
+
+void terminate(void) 
+{
+    printf("Usage: ./caesar key\n");
+    exit(1);
+}
