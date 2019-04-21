@@ -1,0 +1,86 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void terminate(void);
+int shift(char c);
+
+int main(int argc, string argv[]) 
+{  
+  
+    //no more than 2 arguments
+    if (argc != 2) 
+    {
+        terminate();
+    } 
+    else 
+    {
+        // key validation
+        for (int i = 0, n = strlen(argv[1]); i < n; i++) 
+        {
+            //not integers
+            if (!isalpha(argv[1][i]))
+            {
+                terminate();
+            } 
+        }
+    }
+    
+    
+        
+    //get the initial phrase
+    string plaintext = get_string("plaintext:");  
+            
+    printf("ciphertext: ");
+    //iterate through characters
+    for (int k = 0, j = 0, p = strlen(plaintext); k < p; k++) 
+    {
+ 
+        //Get the key
+        int key = shift(argv[1][j % strlen(argv[1])]);
+                
+        //is upper capitalization
+        if (isupper(plaintext[k])) 
+        {
+            printf("%c", ((plaintext[k] - 65 + key) % 26) + 65);
+            j++;
+        } 
+        //lower capitalization
+        else if (islower(plaintext[k])) 
+        {    
+            printf("%c", ((plaintext[k] - 97 + key) % 26) + 97);
+            j++;
+        } 
+        //other characters
+        else 
+        {
+            printf("%c", plaintext[k]);
+        }
+    }    
+    printf("\n");
+    return 0;
+}
+
+void terminate(void) 
+{
+    printf("Usage: ./caesar key\n");
+    exit(1);
+}
+
+
+int shift(char c) 
+{
+    int upk = 0;
+    if (isupper(c)) 
+    {
+        upk = c - 65;
+    } 
+    else if (islower(c)) 
+    {
+        upk = c - 97;
+    }
+    return upk;
+}
+    
+    
